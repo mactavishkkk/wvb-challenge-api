@@ -1,0 +1,35 @@
+networks:
+  dev:
+    driver: bridge
+
+services:
+  # ciotdsystem-app:
+  #   image: docker.io/library/ciotdsystem
+  #   depends_on:
+  #     - app-db
+
+  #   container_name: docker-ciotdsystem
+  #   ports:
+  #     - "8088:80"
+  #   build: 
+  #     context: ../
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - ASPNETCORE_URLS=http://+:80
+  #   networks:
+  #     - dev
+
+  app-db:
+    container_name: docker-ciotdsystem-db
+    build:
+      dockerfile: Dockerfile.db
+    ports:
+      - "5464:5432"
+    restart: always
+    volumes:
+      - app_data:/var/lib/postgresql/data
+    networks:
+      - dev
+
+volumes:
+  app_data:
