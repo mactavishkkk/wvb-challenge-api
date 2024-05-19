@@ -6,6 +6,7 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using CIoTDSystem.Services.Seedings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,6 +42,8 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<UserSeedingService>();
+builder.Services.AddScoped<DeviceSeedingService>();
+builder.Services.AddScoped<CommandSeedingService>();
 
 var app = builder.Build();
 
@@ -50,11 +53,17 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var seedingService = services.GetRequiredService<UserSeedingService>();
         var context = services.GetRequiredService<DataContext>();
 
+        var userSeedingService = services.GetRequiredService<UserSeedingService>();
+        var deviceSeedingService = services.GetRequiredService<DeviceSeedingService>();
+        var commandSeedingService = services.GetRequiredService<CommandSeedingService>();
+
         context.Database.Migrate();
-        seedingService.Seed();
+
+        userSeedingService.Seed();
+        deviceSeedingService.Seed();
+        commandSeedingService.Seed();
     } catch (Exception ex)
     {
         throw new Exception(ex.Message);
