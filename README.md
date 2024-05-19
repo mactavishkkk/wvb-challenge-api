@@ -19,13 +19,13 @@ Certifique-se de ter o Docker e o Docker Compose instalados em sua máquina.
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/mactavishkkk/indt-challenge-api.git
+git clone https://github.com/mactavishkkk/wvb-challenge-api.git
 ```
 
 2. Navegue até o diretório dos arquivos de construção:
 
 ```bash
-cd indt-challenge-api/UserManagementSystem/docker
+cd wvb-challenge-api/CIoTDSystem/docker
 ```
 
 3. Construa as imagens para os ambientes com docker, no terminal use:
