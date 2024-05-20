@@ -96,6 +96,8 @@ app.MapGet("/", () =>
 })
 .WithName("GetWelcomeRoute").WithOpenApi();
 
+app.UseCors();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
