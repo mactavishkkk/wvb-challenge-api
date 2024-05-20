@@ -4,7 +4,10 @@ Este é um projeto construído com .NET 7.0, EntityFramework, PostgreSql e Docke
 
 este projeto foi desenvolvido seguindo algumas boas práticas da Arquitetura Limpa (Clean Architecture), Código Limpo (Clean Code) e DDD;
 
-tambem podemos encontrar testes de unidades que regem o escopo da aplicação como um todo.
+Foi adotado as seguintes práticas pelos benefícios de desacoplamento, legibilidade, manutentabilidade etc. Seguindo o design DDD, temos a camada Principal (domínio do negócio) isolada do resto da aplicação.
+Assim temos um espelhamento das regras nas demais camadas.
+
+Também foi adotado o isolamento de qualquer camada de apresentação, micro-serviço etc; com o intuito de se ter uma abrangência maior e mais variada.
 
 ## Pré-requisitos
 
