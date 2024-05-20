@@ -1,21 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace CIoTDSystem.Models
+namespace CIoTDSystem.Models.DTOs
 {
-    public class Command
+    public class CommandDTO
     {
-        [Column("id")]
-        public int Id { get; set; }
-
-        [Required]
-        [Column("id_device")]
-        public int DeviceId { get; set; }
-
-        [JsonIgnore]
-        public Device? Device { get; set; }
-
         [Required]
         [StringLength(60)]
         [Column("name")]

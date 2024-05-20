@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using CIoTDSystem.Services.Seedings;
+using CIoTDSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,8 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 
 // Add other services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
+
 builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<UserSeedingService>();
 builder.Services.AddScoped<DeviceSeedingService>();
