@@ -1,13 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace CIoTDSystem.Models
+namespace CIoTDSystem.Models.DTOs
 {
-    public class Device
+    public class DeviceDTO
     {
-        [Column("id")]
-        public int Id { get; set; }
-
         [Required]
         [StringLength(7)]
         [Column("identifier")]
@@ -32,12 +29,6 @@ namespace CIoTDSystem.Models
 
         [Required]
         [Column("commands")]
-        public ICollection<Command> Commands { get; set; } = new List<Command>();
-
-        [Column("created_at")]
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-        [Column("updated_at")]
-        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<CommandDTO> Commands { get; set; } = new List<CommandDTO>();
     }
 }

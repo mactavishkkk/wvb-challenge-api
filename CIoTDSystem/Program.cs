@@ -6,6 +6,8 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using CIoTDSystem.Services.Seedings;
+using CIoTDSystem.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,10 +39,23 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 // Add other services
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IDeviceService, DeviceService>();
+
 builder.Services.AddDbContext<DataContext>();
+
 builder.Services.AddScoped<UserSeedingService>();
+builder.Services.AddScoped<DeviceSeedingService>();
+builder.Services.AddScoped<CommandSeedingService>();
 
 var app = builder.Build();
 
@@ -50,11 +65,17 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var seedingService = services.GetRequiredService<UserSeedingService>();
+        var userSeedingService = services.GetRequiredService<UserSeedingService>();
+        var deviceSeedingService = services.GetRequiredService<DeviceSeedingService>();
+        var commandSeedingService = services.GetRequiredService<CommandSeedingService>();
+
         var context = services.GetRequiredService<DataContext>();
 
         context.Database.Migrate();
-        seedingService.Seed();
+
+        userSeedingService.Seed();
+        deviceSeedingService.Seed();
+        commandSeedingService.Seed();
     } catch (Exception ex)
     {
         throw new Exception(ex.Message);
