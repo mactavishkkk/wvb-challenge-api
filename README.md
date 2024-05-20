@@ -64,3 +64,10 @@ agora basta acessar o arquivo `indt-challenge-api/UserManagementSystem/DataDataC
 ## Documentação da API
 
 A documentação da API pode ser encontrada em `http://localhost:8088/swagger/index.html`, onde você pode encontrar informações sobre os endpoints disponíveis, parâmetros de solicitação, respostas e exemplos de uso.
+
+## Sugestões de Melhoria
+- Testes de Unidade
+- Otimização de Requisições (handlers)
+- Camada de Segurança
+- Deploy contínuo
+- Monitoramento e Observança
