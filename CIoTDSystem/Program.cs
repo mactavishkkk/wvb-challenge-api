@@ -39,11 +39,20 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
+});
+
 // Add other services
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDeviceService, DeviceService>();
 
 builder.Services.AddDbContext<DataContext>();
+
 builder.Services.AddScoped<UserSeedingService>();
 builder.Services.AddScoped<DeviceSeedingService>();
 builder.Services.AddScoped<CommandSeedingService>();
@@ -56,11 +65,11 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<DataContext>();
-
         var userSeedingService = services.GetRequiredService<UserSeedingService>();
         var deviceSeedingService = services.GetRequiredService<DeviceSeedingService>();
         var commandSeedingService = services.GetRequiredService<CommandSeedingService>();
+
+        var context = services.GetRequiredService<DataContext>();
 
         context.Database.Migrate();
 

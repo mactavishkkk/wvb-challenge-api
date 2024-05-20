@@ -7,7 +7,6 @@ services:
     image: docker.io/library/ciotdsystem
     depends_on:
       - app-db
-
     container_name: docker-ciotdsystem
     ports:
       - "8088:80"

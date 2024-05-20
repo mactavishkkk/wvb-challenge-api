@@ -14,7 +14,7 @@ namespace CIoTDSystem.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Port=5464;Host=localhost;Database=ciotdsystem-db;Username=postgres;Password=postgres");
+            => optionsBuilder.UseNpgsql("Port=5464;Host=host.docker.internal;Database=ciotdsystem-db;Username=postgres;Password=postgres");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
